@@ -6126,7 +6126,8 @@ function render(){stats();const q=list[pos],card=$('card');document.querySelecto
 function choose(k){const q=list[pos];selected=q.type==='multiple'?(selected.includes(k)?selected.filter(x=>x!==k):[...selected,k]):[k];state.draft={id:q.id,selected};persist();document.querySelectorAll('.option').forEach(b=>b.classList.toggle('selected',selected.includes(b.querySelector('.letter').textContent)));$('submit').disabled=!selected.length}
 function submit(){const q=list[pos],ans=keys(q),ok=selected.length===ans.length&&selected.every(x=>ans.includes(x));state.answers[q.id]={selected:[...selected],correct:ok};state.draft=null;persist();render()}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{state.mode=b.dataset.mode;state.reviewWrong=false;persist();build()});document.querySelectorAll('[data-exam]').forEach(b=>b.onclick=()=>startExam(b.dataset.exam));$('continueStudy').onclick=()=>{state.reviewWrong=false;persist();build()};$('reviewWrong').onclick=()=>{state.reviewWrong=true;persist();build()};
-data=EMBEDDED_QUESTIONS;makeList()})();
+qs=EMBEDDED_QUESTIONS.map((q,i)=>({...q,no:i+1}));build();
+})();
 </script></body></html>
 
 
